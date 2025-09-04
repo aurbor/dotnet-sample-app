@@ -1,0 +1,54 @@
+---
+# Source: weather-api/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: weather-api
+  labels:
+    app: weather-api
+    chart: weather-api-0.1.0
+    version: 1.0.0
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8080
+      protocol: TCP
+  selector:
+    app: weather-api
+---
+# Source: weather-api/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weather-api
+  labels:
+    app: weather-api
+    chart: weather-api-0.1.0
+    version: 1.0.0
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: weather-api
+  template:
+    metadata:
+      labels:
+        app: weather-api
+        version: 1.0.0
+    spec:
+      containers:
+        - name: weather-api
+          image: "ghcr.io/aurbor/dotnet-sample-app:latest"
+          ports:
+            - containerPort: 8080
+          env:
+            - name: ASPNETCORE_ENVIRONMENT
+              value: Production
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+            requests:
+              cpu: 250m
+              memory: 64Mi
