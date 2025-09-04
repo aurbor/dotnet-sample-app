@@ -17,6 +17,6 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
     - name: Build and Push
       run: |
-        IMAGE=ghcr.io/${{ github.repository }}/dotnet-sample-app:latest
+        IMAGE=ghcr.io/${{ github.actor }}/dotnet-sample-app:latest
         docker build -t $IMAGE ./app
         docker push $IMAGE
