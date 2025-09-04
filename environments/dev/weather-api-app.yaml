@@ -12,7 +12,7 @@ spec:
     helm:
       values: |
         image:
-          repository: weather-api
+          repository: ghcr.io/aurbor/dotnet-sample-app
           tag: latest
   destination:
     server: https://kubernetes.default.svc
