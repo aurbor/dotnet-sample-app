@@ -1,0 +1,10 @@
+replicaCount: 1
+
+image:
+  repository: weather-api
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
